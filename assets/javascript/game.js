@@ -26,8 +26,11 @@ $(document).ready(function() {
         function startGame() {
             goal = Math.floor(Math.random() * (MAX_GOAL_VALUE-MIN_GOAL_VALUE)) + MIN_GOAL_VALUE;
             $("#goal").html("<h1>Goal: " + goal + "</h1>");
+            console.log("start");
+            $("wins").html("<h1>Wins: " + wins + "</h1>");
+            $("losses").html("<h1>Losses: " + losses + "</h1>");
 
-    };
+        };
 
     startGame();
 
@@ -41,10 +44,32 @@ $(document).ready(function() {
 
 
         if (total > goal) {
-            $("#message").html("<h1>You lose! Press any key to play again </h1>");
+            $("#message").html("<h1>You lose!</h1>");
             $(".crystal").off();
+            var playAgain = $("<button>Play Again?</button>")
+            $("#play-again").append(playAgain);
+            playAgain.addClass("btn btn-primary");
+            losses--;
+            $("losses").html("<h1>Losses: " + losses + "</h1>");
+            $(playAgain).on("click", function() {
+                startGame();
+            });       
         }
 
-        });
+        else if (total === goal) {
+            $("#message").html("<h1>You win!</h1>");
+            $(".crystal").off();
+            var playAgain = $("<button>Play Again?</button>")
+            $("#play-again").append(playAgain);
+            playAgain.addClass("btn btn-primary");
+            wins++;
+            $("wins").html("<h1>Wins: " + wins + "</h1>");
+            $(playAgain).on("click", function() {
+                startGame();
+            });  
 
-});
+        }
+        
+
+        });
+    });
