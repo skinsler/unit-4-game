@@ -12,13 +12,20 @@ var crystalValues = []
 
 $(document).ready(function() {
 
+
+
+    for (i=0;i<NUMBER_CRYSTALS;i++) {
+        var random = Math.floor(Math.random() * MAX_CRYSTAL_VALUE) +1;
+        crystalValues.push(random);
+    }
  
 
-
+    console.log(crystalValues);
 
 
     function startGame() {
-
+        goal = Math.floor(Math.random() * (MAX_GOAL_VALUE-MIN_GOAL_VALUE)) + MIN_GOAL_VALUE;
+        $("#goal").html("<h1>Goal: " + goal + "</h1>");
 
     };
 
@@ -28,7 +35,6 @@ $(document).ready(function() {
         let crystalId = $(this).attr('id');
         console.log(crystalId);
 
-        if 
         });
 
 });
