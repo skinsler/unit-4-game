@@ -27,14 +27,11 @@ $(document).ready(function() {
             goal = Math.floor(Math.random() * (MAX_GOAL_VALUE-MIN_GOAL_VALUE)) + MIN_GOAL_VALUE;
             $("#goal").html("<h1>Goal: " + goal + "</h1>");
             console.log("start");
-            $("wins").html("<h1>Wins: " + wins + "</h1>");
-            $("losses").html("<h1>Losses: " + losses + "</h1>");
-
-        };
-
-    startGame();
-
-    $(".crystal").on("click", function() {
+            $("#wins").html("<h1>Wins: " + wins + "</h1>");
+            $("#losses").html("<h1>Losses: " + losses + "</h1>");
+            $("#total").html("<h1>Your total: " + total + "</h1>");
+            
+                $(".crystal").on("click", function() {
         let crystalId = $(this).attr('id');
         console.log(crystalId);
 
@@ -49,11 +46,12 @@ $(document).ready(function() {
             var playAgain = $("<button>Play Again?</button>")
             $("#play-again").append(playAgain);
             playAgain.addClass("btn btn-primary");
-            losses--;
-            $("losses").html("<h1>Losses: " + losses + "</h1>");
+            losses++;
+            $("#losses").html("<h1>Losses: " + losses + "</h1>");
             $(playAgain).on("click", function() {
                 startGame();
-            });       
+            });
+            total = 0;       
         }
 
         else if (total === goal) {
@@ -63,13 +61,21 @@ $(document).ready(function() {
             $("#play-again").append(playAgain);
             playAgain.addClass("btn btn-primary");
             wins++;
-            $("wins").html("<h1>Wins: " + wins + "</h1>");
+            $("#wins").html("<h1>Wins: " + wins + "</h1>");
             $(playAgain).on("click", function() {
+                $(this).remove();
                 startGame();
-            });  
+            });
+            total = 0;  
 
         }
         
 
         });
+
+        };
+
+    startGame();
+
+
     });
